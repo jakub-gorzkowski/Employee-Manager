@@ -22,16 +22,15 @@ CREATE TABLE clients (
 CREATE TABLE projects (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    client_id INT,
+    client_id INT NOT NULL,
+    is_active BOOLEAN NOT NULL,
     FOREIGN KEY (client_id) REFERENCES clients(id)
 );
 
 CREATE TABLE employees_projects (
-    employee_id INT,
-    project_id INT,
-    is_active BOOLEAN,
-    is_finished BOOLEAN,
+    employee_id INT NOT NULL,
+    project_id INT NOT NULL,
     PRIMARY KEY (employee_id, project_id),
-    FOREIGN KEY (employee_id) REFERENCES employees(id),
-    FOREIGN KEY (project_id) REFERENCES projects(id)
+    FOREIGN KEY (employee_id) REFERENCES employees(id) ON DELETE CASCADE,
+    FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
 );
