@@ -1,6 +1,6 @@
 package Queries.Create;
 
-import Entities.EmployeeProject;
+import Entities.Employee.EmployeeProject;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,11 +1,11 @@
-package Entities;
+package Entities.Person;
 
-import Entities.Person;
+import Entities.Employee.EmployeeRole;
 
 import java.math.BigDecimal;
 
 public class Employee extends Person {
-    private final String TABLE_NAME = "employees";
+    private final static String TABLE_NAME = "employees";
     private EmployeeRole role;
     private BigDecimal salary;
     public Employee(String name, String surname, String email, String phoneNumber, EmployeeRole role, BigDecimal salary) {
@@ -14,7 +14,7 @@ public class Employee extends Person {
         this.salary = salary;
     }
 
-    public String getTABLE_NAME() {
+    public static String getTABLE_NAME() {
         return TABLE_NAME;
     }
 

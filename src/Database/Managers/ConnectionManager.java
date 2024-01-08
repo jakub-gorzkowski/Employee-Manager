@@ -1,3 +1,6 @@
+package Database.Managers;
+
+import Database.Model.Database;
 import org.postgresql.util.PSQLException;
 
 import java.sql.DriverManager;
@@ -7,7 +10,7 @@ public class ConnectionManager {
     private Database database;
     private String url;
 
-    ConnectionManager(Database database) {
+    public ConnectionManager(Database database) {
         this.database = database;
         this.url = "jdbc:postgresql://localhost:" + database.getPort() + "/" + database.getName();
     }

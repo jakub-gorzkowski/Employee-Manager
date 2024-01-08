@@ -1,4 +1,4 @@
-package Entities;
+package Entities.Person;
 
 public abstract class Person {
     private String name;

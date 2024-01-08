@@ -1,7 +1,7 @@
-package Entities;
+package Entities.Person;
 
 public class Client extends Person {
-    private final String TABLE_NAME = "clients";
+    private final static String TABLE_NAME = "clients";
     private String company;
 
     public Client(String name, String surname, String email, String phoneNumber) {
@@ -12,7 +12,7 @@ public class Client extends Person {
         this.company = company;
     }
 
-    public String getTABLE_NAME() {
+    public static String getTABLE_NAME() {
         return TABLE_NAME;
     }
 

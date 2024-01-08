@@ -1,3 +1,5 @@
+package Database.Model;
+
 import java.sql.Connection;
 
 public class Database {
@@ -33,7 +35,7 @@ public class Database {
 
     @Override
     public String toString() {
-        return "Database{" +
+        return "Database.Model.Database{" +
                 "name='" + name + '\'' +
                 ", port='" + port + '\'' +
                 ", connection=" + connection +

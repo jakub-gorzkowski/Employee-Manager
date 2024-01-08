@@ -24,7 +24,7 @@ CREATE TABLE projects (
     name VARCHAR(255) NOT NULL,
     client_id INT NOT NULL,
     is_active BOOLEAN NOT NULL,
-    FOREIGN KEY (client_id) REFERENCES clients(id)
+    FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE
 );
 
 CREATE TABLE employees_projects (

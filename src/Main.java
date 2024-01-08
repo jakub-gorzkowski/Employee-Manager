@@ -1,3 +1,5 @@
+import Database.Managers.ConnectionManager;
+import Database.Model.Database;
 import java.util.Scanner;
 
 public class Main {
@@ -11,9 +13,6 @@ public class Main {
         password = scanner.nextLine();
 
         connectionManager.connect(username, password);
-        System.out.println(database);
-
         connectionManager.disconnect();
-        System.out.println(database);
     }
 }

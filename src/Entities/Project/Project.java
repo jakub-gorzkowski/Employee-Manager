@@ -1,7 +1,7 @@
-package Entities;
+package Entities.Project;
 
 public class Project {
-    private final String TABLE_NAME = "projects";
+    private final static String TABLE_NAME = "projects";
     private String name;
     private int clientId;
     private boolean isActive;
@@ -12,7 +12,7 @@ public class Project {
         this.isActive = isActive;
     }
 
-    public String getTABLE_NAME() {
+    public static String getTABLE_NAME() {
         return TABLE_NAME;
     }
 

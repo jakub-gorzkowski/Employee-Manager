@@ -1,7 +1,7 @@
-package Entities;
+package Entities.Employee;
 
 public class EmployeeProject {
-    private final String TABLE_NAME = "employees_projects";
+    private final static String TABLE_NAME = "employees_projects";
     private int employeeId;
     private int projectId;
 
@@ -10,7 +10,7 @@ public class EmployeeProject {
         this.projectId = projectId;
     }
 
-    public String getTABLE_NAME() {
+    public static String getTABLE_NAME() {
         return TABLE_NAME;
     }
 

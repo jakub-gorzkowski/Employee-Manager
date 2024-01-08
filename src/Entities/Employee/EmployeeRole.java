@@ -1,4 +1,4 @@
-package Entities;
+package Entities.Employee;
 
 public enum EmployeeRole {
     MANAGER,
