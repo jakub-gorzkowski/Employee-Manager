@@ -17,27 +17,44 @@ public class DeleteProjectPage extends JPanel implements ActionListener {
     private JTextField clientId;
     public DeleteProjectPage(Database database) {
         this.database = database;
-        setLayout(new GridLayout(5, 2, 10, 10));
-        setBackground(Color.WHITE);
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setPreferredSize(new Dimension(400, 400));
 
-        JLabel idLabel = new JLabel("ID");
-        add(idLabel);
-        id = new JTextField();
-        add(id);
+        JPanel formPanel = new JPanel(new GridLayout(3, 1, 10, 10));
+        formPanel.setBackground(Color.WHITE);
 
-        JLabel nameLabel = new JLabel("Name");
-        add(nameLabel);
-        name = new JTextField();
-        add(name);
-
-        JLabel clientIdLabel = new JLabel("Client ID");
-        add(clientIdLabel);
-        clientId = new JTextField();
-        add(clientId);
+        addRow(formPanel, "Id");
+        addRow(formPanel, "Name");
+        addRow(formPanel, "Client Id");
+        mainPanel.add(formPanel, BorderLayout.CENTER);
 
         JButton submit = new JButton("Delete");
-        add(submit);
+        mainPanel.add(submit, BorderLayout.SOUTH);
         submit.addActionListener(this);
+
+        add(mainPanel);
+    }
+
+    private void addRow(JPanel panel, String label) {
+        JPanel rowPanel = new JPanel(new GridLayout(1, 2, 10, 10));
+        JLabel labelComponent = new JLabel(label);
+        rowPanel.add(labelComponent);
+
+        switch (label) {
+            case "Id":
+                id = new JTextField();
+                rowPanel.add(id);
+                break;
+            case "Name":
+                name = new JTextField();
+                rowPanel.add(name);
+                break;
+            case "Client Id":
+                clientId = new JTextField();
+                rowPanel.add(clientId);
+                break;
+        }
+        panel.add(rowPanel);
     }
 
     @Override

@@ -23,7 +23,7 @@ public class CreateClientPage extends JPanel implements ActionListener {
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setPreferredSize(new Dimension(400, 400));
 
-        JPanel formPanel = new JPanel(new GridLayout(7, 1, 10, 10));
+        JPanel formPanel = new JPanel(new GridLayout(5, 1, 10, 10));
         formPanel.setBackground(Color.WHITE);
 
         addRow(formPanel, "Name");
@@ -68,7 +68,6 @@ public class CreateClientPage extends JPanel implements ActionListener {
                 rowPanel.add(company);
                 break;
         }
-
         panel.add(rowPanel);
     }
 

@@ -24,49 +24,65 @@ public class DeleteEmployeePage extends JPanel implements ActionListener {
 
     public DeleteEmployeePage(Database database) {
         this.database = database;
-        setLayout(new GridLayout(8, 2, 10, 10));
-        setBackground(Color.WHITE);
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setPreferredSize(new Dimension(400, 400));
 
-        JLabel idLabel = new JLabel("ID");
-        add(idLabel);
-        id = new JTextField();
-        add(id);
+        JPanel formPanel = new JPanel(new GridLayout(7, 1, 10, 10));
+        formPanel.setBackground(Color.WHITE);
 
-        JLabel nameLabel = new JLabel("Name");
-        add(nameLabel);
-        name = new JTextField();
-        add(name);
+        addRow(formPanel, "Id");
+        addRow(formPanel, "Name");
+        addRow(formPanel, "Surname");
+        addRow(formPanel, "Email");
+        addRow(formPanel, "Phone number");
+        addRow(formPanel, "Role");
+        addRow(formPanel, "Salary");
 
-        JLabel surnameLabel = new JLabel("Surname");
-        add(surnameLabel);
-        surname = new JTextField();
-        add(surname);
-
-        JLabel emailLabel = new JLabel("Email");
-        add(emailLabel);
-        email = new JTextField();
-        add(email);
-
-        JLabel phoneNumberLabel = new JLabel("Phone number");
-        add(phoneNumberLabel);
-        phoneNumber = new JTextField();
-        add(phoneNumber);
-
-        JLabel roleLabel = new JLabel("Role");
-        add(roleLabel);
-        role = new JComboBox<>(EmployeeRole.values());
-        role.addItem("");
-        role.setSelectedItem("");
-        add(role);
-
-        JLabel salaryLabel = new JLabel("Salary");
-        add(salaryLabel);
-        salary = new JTextField();
-        add(salary);
+        mainPanel.add(formPanel, BorderLayout.CENTER);
 
         JButton submit = new JButton("Delete");
-        add(submit);
+        mainPanel.add(submit, BorderLayout.SOUTH);
         submit.addActionListener(this);
+
+        add(mainPanel);
+    }
+
+    private void addRow(JPanel panel, String label) {
+        JPanel rowPanel = new JPanel(new GridLayout(1, 2, 10, 10));
+        JLabel labelComponent = new JLabel(label);
+        rowPanel.add(labelComponent);
+
+        switch (label) {
+            case "Id":
+                id = new JTextField();
+                rowPanel.add(id);
+                break;
+            case "Name":
+                name = new JTextField();
+                rowPanel.add(name);
+                break;
+            case "Surname":
+                surname = new JTextField();
+                rowPanel.add(surname);
+                break;
+            case "Email":
+                email = new JTextField();
+                rowPanel.add(email);
+                break;
+            case "Phone number":
+                phoneNumber = new JTextField();
+                rowPanel.add(phoneNumber);
+                break;
+            case "Role":
+                role = new JComboBox<>(EmployeeRole.values());
+                rowPanel.add(role);
+                break;
+            case "Salary":
+                salary = new JTextField();
+                rowPanel.add(salary);
+                break;
+        }
+        panel.add(rowPanel);
     }
 
     @Override
@@ -108,6 +124,7 @@ public class DeleteEmployeePage extends JPanel implements ActionListener {
             JOptionPane.showMessageDialog(this, "Error occurred.");
         }
 
+        id.setText("");
         name.setText("");
         surname.setText("");
         email.setText("");

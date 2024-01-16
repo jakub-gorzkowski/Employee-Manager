@@ -18,7 +18,17 @@ public class Login implements ActionListener {
     JLabel usernameLabel = new JLabel("login");
     JLabel passwordLabel = new JLabel("password");
     JLabel message = new JLabel();
-    public Login(Database database, ConnectionManager connectionManager) {
+
+    private static Login singleton = null;
+
+    public static Login getInstance(Database database, ConnectionManager connectionManager) {
+        if (singleton == null) {
+            singleton = new Login(database, connectionManager);
+        }
+        return singleton;
+    }
+
+    private Login(Database database, ConnectionManager connectionManager) {
         this.database = database;
         this.connectionManager = connectionManager;
 

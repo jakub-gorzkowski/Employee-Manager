@@ -22,42 +22,60 @@ public class CreateEmployeePage extends JPanel implements ActionListener {
 
     public CreateEmployeePage(Database database) {
         this.database = database;
-        setLayout(new GridLayout(7, 2, 10, 10));
-        setBackground(Color.WHITE);
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setPreferredSize(new Dimension(400, 400));
 
-        JLabel nameLabel = new JLabel("Name");
-        add(nameLabel);
-        name = new JTextField();
-        add(name);
+        JPanel formPanel = new JPanel(new GridLayout(6, 1, 10, 10));
+        formPanel.setBackground(Color.WHITE);
 
-        JLabel surnameLabel = new JLabel("Surname");
-        add(surnameLabel);
-        surname = new JTextField();
-        add(surname);
+        addRow(formPanel, "Name");
+        addRow(formPanel, "Surname");
+        addRow(formPanel, "Email");
+        addRow(formPanel, "Phone number");
+        addRow(formPanel, "Role");
+        addRow(formPanel, "Salary");
 
-        JLabel emailLabel = new JLabel("Email");
-        add(emailLabel);
-        email = new JTextField();
-        add(email);
-
-        JLabel phoneNumberLabel = new JLabel("Phone number");
-        add(phoneNumberLabel);
-        phoneNumber = new JTextField();
-        add(phoneNumber);
-
-        JLabel roleLabel = new JLabel("Role");
-        add(roleLabel);
-        role = new JComboBox<>(EmployeeRole.values());
-        add(role);
-
-        JLabel salaryLabel = new JLabel("Salary");
-        add(salaryLabel);
-        salary = new JTextField();
-        add(salary);
+        mainPanel.add(formPanel, BorderLayout.CENTER);
 
         JButton submit = new JButton("Insert");
-        add(submit);
+        mainPanel.add(submit, BorderLayout.SOUTH);
         submit.addActionListener(this);
+
+        add(mainPanel);
+    }
+
+    private void addRow(JPanel panel, String label) {
+        JPanel rowPanel = new JPanel(new GridLayout(1, 2, 10, 10));
+        JLabel labelComponent = new JLabel(label);
+        rowPanel.add(labelComponent);
+
+        switch (label) {
+            case "Name":
+                name = new JTextField();
+                rowPanel.add(name);
+                break;
+            case "Surname":
+                surname = new JTextField();
+                rowPanel.add(surname);
+                break;
+            case "Email":
+                email = new JTextField();
+                rowPanel.add(email);
+                break;
+            case "Phone number":
+                phoneNumber = new JTextField();
+                rowPanel.add(phoneNumber);
+                break;
+            case "Role":
+                role = new JComboBox<>(EmployeeRole.values());
+                rowPanel.add(role);
+                break;
+            case "Salary":
+                salary = new JTextField();
+                rowPanel.add(salary);
+                break;
+        }
+        panel.add(rowPanel);
     }
 
     @Override

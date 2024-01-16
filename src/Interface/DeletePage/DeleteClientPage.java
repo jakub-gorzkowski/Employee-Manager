@@ -21,42 +21,61 @@ public class DeleteClientPage extends JPanel implements ActionListener {
 
     public DeleteClientPage(Database database) {
         this.database = database;
-        setLayout(new GridLayout(7, 2, 10, 10));
-        setBackground(Color.WHITE);
 
-        JLabel idLabel = new JLabel("ID");
-        add(idLabel);
-        id = new JTextField();
-        add(id);
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setPreferredSize(new Dimension(400, 400));
 
-        JLabel nameLabel = new JLabel("Name");
-        add(nameLabel);
-        name = new JTextField();
-        add(name);
+        JPanel formPanel = new JPanel(new GridLayout(6, 1, 10, 10));
+        formPanel.setBackground(Color.WHITE);
 
-        JLabel surnameLabel = new JLabel("Surname");
-        add(surnameLabel);
-        surname = new JTextField();
-        add(surname);
+        addRow(formPanel, "Id");
+        addRow(formPanel, "Name");
+        addRow(formPanel, "Surname");
+        addRow(formPanel, "Email");
+        addRow(formPanel, "Phone number");
+        addRow(formPanel, "Company");
 
-        JLabel emailLabel = new JLabel("Email");
-        add(emailLabel);
-        email = new JTextField();
-        add(email);
-
-        JLabel phoneNumberLabel = new JLabel("Phone number");
-        add(phoneNumberLabel);
-        phoneNumber = new JTextField();
-        add(phoneNumber);
-
-        JLabel companyLabel = new JLabel("Company");
-        add(companyLabel);
-        company = new JTextField();
-        add(company);
+        mainPanel.add(formPanel, BorderLayout.CENTER);
 
         JButton submit = new JButton("Delete");
-        add(submit);
+        mainPanel.add(submit, BorderLayout.SOUTH);
         submit.addActionListener(this);
+
+        add(mainPanel);
+    }
+
+    private void addRow(JPanel panel, String label) {
+        JPanel rowPanel = new JPanel(new GridLayout(1, 2, 10, 10));
+        JLabel labelComponent = new JLabel(label);
+        rowPanel.add(labelComponent);
+
+        switch (label) {
+            case "Id":
+                id = new JTextField();
+                rowPanel.add(id);
+                break;
+            case "Name":
+                name = new JTextField();
+                rowPanel.add(name);
+                break;
+            case "Surname":
+                surname = new JTextField();
+                rowPanel.add(surname);
+                break;
+            case "Email":
+                email = new JTextField();
+                rowPanel.add(email);
+                break;
+            case "Phone number":
+                phoneNumber = new JTextField();
+                rowPanel.add(phoneNumber);
+                break;
+            case "Company":
+                company = new JTextField();
+                rowPanel.add(company);
+                break;
+        }
+        panel.add(rowPanel);
     }
 
     @Override

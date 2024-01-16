@@ -17,27 +17,44 @@ public class CreateProjectPage extends JPanel implements ActionListener {
 
     public CreateProjectPage(Database database) {
         this.database = database;
-        setLayout(new GridLayout(4, 2, 10, 10));
-        setBackground(Color.WHITE);
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setPreferredSize(new Dimension(400, 400));
 
-        JLabel nameLabel = new JLabel("Name");
-        add(nameLabel);
-        name = new JTextField();
-        add(name);
+        JPanel formPanel = new JPanel(new GridLayout(3, 1, 10, 10));
+        formPanel.setBackground(Color.WHITE);
 
-        JLabel clientIdLabel = new JLabel("Client ID");
-        add(clientIdLabel);
-        clientId = new JTextField();
-        add(clientId);
-
-        JLabel isActiveLabel = new JLabel("Is active");
-        add(isActiveLabel);
-        isActive = new JCheckBox();
-        add(isActive);
+        addRow(formPanel, "Name");
+        addRow(formPanel, "Client Id");
+        addRow(formPanel, "Is active");
+        mainPanel.add(formPanel, BorderLayout.CENTER);
 
         JButton submit = new JButton("Insert");
-        add(submit);
+        mainPanel.add(submit, BorderLayout.SOUTH);
         submit.addActionListener(this);
+
+        add(mainPanel);
+    }
+
+    private void addRow(JPanel panel, String label) {
+        JPanel rowPanel = new JPanel(new GridLayout(1, 2, 10, 10));
+        JLabel labelComponent = new JLabel(label);
+        rowPanel.add(labelComponent);
+
+        switch (label) {
+            case "Name":
+                name = new JTextField();
+                rowPanel.add(name);
+                break;
+            case "Client Id":
+                clientId = new JTextField();
+                rowPanel.add(clientId);
+                break;
+            case "Is active":
+                isActive = new JCheckBox();
+                rowPanel.add(isActive);
+                break;
+        }
+        panel.add(rowPanel);
     }
 
     @Override
