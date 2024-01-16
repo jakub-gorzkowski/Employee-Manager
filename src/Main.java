@@ -1,7 +1,6 @@
-import Database.Managers.ConnectionManager;
-import Database.Model.Database;
-import Interface.Login;
-import QueryHandlers.Filter;
+import Database.ConnectionManager;
+import Database.Database;
+import View.Login;
 
 public class Main {
     public static void main(String[] args) {
