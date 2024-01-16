@@ -4,9 +4,10 @@ import QueryHandlers.Field;
 import QueryHandlers.Filter;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class ReadEntityTable implements Read {
-    public static void performAction(Connection connection, String tableName, Field fields, Filter filters) {
+    public static ArrayList<ArrayList<Object>> performAction(Connection connection, String tableName, Field fields, Filter filters) {
         String query;
 
         if (fields.getFields() == "" && filters.getFilters() == "") {
@@ -22,29 +23,41 @@ public class ReadEntityTable implements Read {
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             ResultSetMetaData metaData = preparedStatement.getMetaData();
             ResultSet output = preparedStatement.executeQuery();
-            int index;
+            ArrayList<ArrayList<Object>> data = new ArrayList<>();
+            data.add(new ArrayList<>());
 
             if (fields.getFields() != "") {
+                for (String field : fields.getFieldList()) {
+                    data.get(0).add(field);
+                }
+
                 while (output.next()) {
-                    index = 1;
+                    ArrayList<Object> row = new ArrayList<>();
                     for (String field : fields.getFieldList()) {
-                        System.out.println(metaData.getColumnName(index++) + ": " + output.getObject(field));
+                        row.add(output.getObject(field));
                     }
-                    System.out.println();
+                    data.add(row);
                 }
             } else {
+                for (int index = 1; index <= metaData.getColumnCount(); index++) {
+                    data.get(0).add(metaData.getColumnName(index));
+                }
+
                 while (output.next()) {
-                    for (index = 1; index <= output.getMetaData().getColumnCount(); index++) {
-                        System.out.println(metaData.getColumnName(index) + ": " + output.getObject(index));
+                    ArrayList<Object> row = new ArrayList<>();
+                    for (int index = 1; index <= metaData.getColumnCount(); index++) {
+                        row.add(output.getObject(index));
                     }
-                    System.out.println();
+                    data.add(row);
                 }
             }
 
             fields.clearFields();
             filters.clearFilters();
+            return data;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
     }
 }

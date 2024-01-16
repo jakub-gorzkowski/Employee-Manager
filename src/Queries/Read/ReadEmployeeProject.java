@@ -7,8 +7,9 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class ReadEmployeeProject implements Read {
-    public static void performAction(Connection connection, String tableName, String table1, Columns fields1, String table2, Columns fields2, Filter filters) {
+    public static ArrayList<ArrayList<Object>> performAction(Connection connection, String tableName, String table1, Columns fields1, String table2, Columns fields2, Filter filters) {
         StringBuilder query = new StringBuilder("SELECT ");
+        ArrayList<ArrayList<Object>> data = new ArrayList<>();
 
         if (fields1.getColumns(table1) != "" && fields2.getColumns(table2) != "") {
             query.append(fields1.getColumns(table1) + ", " + fields2.getColumns(table2) + " FROM " + table1 + " ");
@@ -31,7 +32,7 @@ public class ReadEmployeeProject implements Read {
 
                 while (output.next()) {
                     int index = 0;
-                    for (String field: fields) {
+                    for (String field : fields) {
                         System.out.println(metaData.getColumnName(++index) + ": " + output.getObject(field));
                     }
 
@@ -42,9 +43,11 @@ public class ReadEmployeeProject implements Read {
                 fields1.clearFormattedColumns();
                 fields2.clearColumns();
                 fields2.clearFormattedColumns();
+
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         }
+        return data;
     }
 }
